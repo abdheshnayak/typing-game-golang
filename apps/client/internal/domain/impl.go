@@ -3,7 +3,7 @@ package domain
 import (
 	"context"
 
-	"game.typing-guru.com/grpc-interfaces/game.typing-guru.com/rpc/user"
+	"github.com/abdheshnayak/typing-game/grpc-interfaces/rpc/user"
 )
 
 type domainI struct {

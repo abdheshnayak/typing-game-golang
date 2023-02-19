@@ -3,7 +3,7 @@ package domain
 import (
 	"context"
 
-	"game.typing-guru.com/grpc-interfaces/game.typing-guru.com/rpc/user"
+	"github.com/abdheshnayak/typing-game/grpc-interfaces/rpc/user"
 )
 
 type domainI struct {
@@ -40,13 +40,40 @@ func (d *domainI) GetUserByName(_ context.Context, input *user.GetUserByNameIn) 
 	}, nil
 }
 
-func (d *domainI) GetUserBySession(_ context.Context, input *user.GetUserBySessionIdIn) (*user.GetUserOut, error) {
+func (d *domainI) GetUserBySession(_ context.Context, input *user.SessionIdIn) (*user.GetUserOut, error) {
 
 	return &user.GetUserOut{
 		Username: "sample",
 		Email:    "sample@gmail.com",
 		Id:       "user_sample",
 		Status:   "active",
+	}, nil
+}
+
+func (d *domainI) RegisterUser(_ context.Context, input *user.RegisterUserIn) (*user.GetUserOut, error) {
+	return &user.GetUserOut{
+		Username: "sample",
+		Email:    "sample@gmail.com",
+		Id:       "user_sample",
+		Status:   "active",
+	}, nil
+}
+
+func (d *domainI) UserLogin(_ context.Context, input *user.LoginIn) (*user.SessionOut, error) {
+	return &user.SessionOut{
+		Session: "hi",
+		User: &user.GetUserOut{
+			Username: "sample",
+			Email:    "sample@gmail.com",
+			Id:       "user_sample",
+			Status:   "active",
+		},
+	}, nil
+}
+
+func (d *domainI) UserLogOut(_ context.Context, input *user.SessionIdIn) (*user.BoolOut, error) {
+	return &user.BoolOut{
+		IsSuccess: false,
 	}, nil
 }
 

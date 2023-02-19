@@ -1,7 +1,7 @@
 package main
 
 import (
-	"game.typing-guru.com/apps/server/internal/framework"
+	"github.com/abdheshnayak/typing-game/apps/server/internal/framework"
 	"go.uber.org/fx"
 )
 

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"game.typing-guru.com/apps/client/internal/framework"
+	"github.com/abdheshnayak/typing-game/apps/client/internal/framework"
 	"go.uber.org/fx"
 )
 
 func main() {
-	fx.New(framework.Module).Run()
+	fx.New(framework.Module,fx.NopLogger).Run()
 }

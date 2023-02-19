@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"game.typing-guru.com/grpc-interfaces/game.typing-guru.com/rpc/user"
+	"github.com/abdheshnayak/typing-game/grpc-interfaces/rpc/user"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )

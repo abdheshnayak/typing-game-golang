@@ -1,8 +1,8 @@
 package app
 
 import (
-	"game.typing-guru.com/apps/client/internal/domain"
-	"game.typing-guru.com/apps/client/internal/ui"
+	"github.com/abdheshnayak/typing-game/apps/client/internal/domain"
+	"github.com/abdheshnayak/typing-game/apps/client/internal/ui"
 	"go.uber.org/fx"
 )
 

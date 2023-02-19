@@ -1,12 +1,20 @@
 syntax = "proto3";
 
-option go_package = "game.typing-guru.com/rpc/user";
+option go_package = "rpc/user";
 
 service User {
   rpc GetUserById(GetUserByIdIn) returns (GetUserOut);
   rpc GetUserByEmail(GetUserByEmailIn) returns (GetUserOut);
   rpc GetUserByName(GetUserByNameIn) returns (GetUserOut);
-  rpc GetUserBySession(GetUserBySessionIdIn) returns (GetUserOut);
+  rpc GetUserBySession(SessionIdIn) returns (GetUserOut);
+
+  rpc RegisterUser(RegisterUserIn) returns (GetUserOut);
+  rpc UserLogin(LoginIn) returns (SessionOut);
+  rpc UserLogOut(SessionIdIn) returns (BoolOut);
+}
+
+message BoolOut {
+  bool isSuccess = 1;
 }
 
 message GetUserOut {
@@ -14,12 +22,12 @@ message GetUserOut {
   string email = 2;
   string id = 3;
   string status = 4;
+  string name = 5;
 }
 
 message GetUserByEmailIn {
   string email = 1;
 }
-
 
 message GetUserByNameIn {
   string username = 1;
@@ -29,6 +37,24 @@ message GetUserByIdIn {
   string id = 1;
 }
 
-message GetUserBySessionIdIn {
+message SessionIdIn {
   string sessionId = 1;
+}
+
+message RegisterUserIn{
+  string username = 1;
+  string email = 2;
+  string name = 3;
+  string password = 4;
+}
+
+message LoginIn{
+  string username = 1;
+  string email = 2;
+  string password = 4;
+}
+
+message SessionOut{
+  string session = 1;
+  GetUserOut user = 2;
 }

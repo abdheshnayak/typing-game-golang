@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"game.typing-guru.com/apps/client/internal/domain"
+	"github.com/abdheshnayak/typing-game/apps/client/internal/domain"
 	"github.com/rivo/tview"
 	"go.uber.org/fx"
 )

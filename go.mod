@@ -1,4 +1,4 @@
-module game.typing-guru.com
+module github.com/abdheshnayak/typing-game
 
 go 1.18
 

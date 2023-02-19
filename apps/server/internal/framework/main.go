@@ -1,8 +1,8 @@
 package framework
 
 import (
-	"game.typing-guru.com/apps/server/internal/app"
-	"game.typing-guru.com/pkg/grpcfx"
+	"github.com/abdheshnayak/typing-game/apps/server/internal/app"
+	"github.com/abdheshnayak/typing-game/pkg/grpcfx"
 	"go.uber.org/fx"
 )
 

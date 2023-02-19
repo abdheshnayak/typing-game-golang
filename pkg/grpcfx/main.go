@@ -6,8 +6,8 @@ import (
 	"net"
 	"os"
 
-	"game.typing-guru.com/grpc-interfaces/game.typing-guru.com/rpc/user"
-	"game.typing-guru.com/pkg/errors"
+	"github.com/abdheshnayak/typing-game/grpc-interfaces/rpc/user"
+	"github.com/abdheshnayak/typing-game/pkg/errors"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
