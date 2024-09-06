@@ -2,12 +2,28 @@ package domain
 
 import (
 	"context"
+	"time"
+
+	log "github.com/sirupsen/logrus"
+
+	// "log"
 
 	"github.com/abdheshnayak/typing-game/grpc-interfaces/rpc/user"
 )
 
 type domainI struct {
 	user.UnimplementedUserServer
+}
+
+func (d *domainI) UserDebugLog(_ context.Context, input *user.LogsIn) (*user.BoolOut, error) {
+
+	time.Sleep(time.Second * 10)
+	// log.Fatal("hello")
+	log.Infoln("[UDL]:", input.Msg)
+
+	return &user.BoolOut{
+		IsSuccess: true,
+	}, nil
 }
 
 func (d *domainI) GetUserByEmail(_ context.Context, input *user.GetUserByEmailIn) (*user.GetUserOut, error) {

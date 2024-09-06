@@ -2,6 +2,11 @@ syntax = "proto3";
 
 option go_package = "rpc/user";
 
+/*
+   :tasks
+
+*/
+
 service User {
   rpc GetUserById(GetUserByIdIn) returns (GetUserOut);
   rpc GetUserByEmail(GetUserByEmailIn) returns (GetUserOut);
@@ -11,6 +16,12 @@ service User {
   rpc RegisterUser(RegisterUserIn) returns (GetUserOut);
   rpc UserLogin(LoginIn) returns (SessionOut);
   rpc UserLogOut(SessionIdIn) returns (BoolOut);
+
+  rpc UserDebugLog(LogsIn) returns (BoolOut);
+}
+
+message LogsIn{
+  string msg = 1;
 }
 
 message BoolOut {

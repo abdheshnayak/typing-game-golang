@@ -17,6 +17,15 @@ func (d *domainI) GetUserById(ctx context.Context, userId string) (*user.GetUser
 
 }
 
+func (d *domainI) UserDebugLog(msg string) {
+	ctx := context.TODO()
+	go func() {
+		d.userClient.UserDebugLog(ctx, &user.LogsIn{
+			Msg: msg,
+		})
+	}()
+}
+
 func fxRPCClient(userClient user.UserClient) Domain {
 	return &domainI{
 		userClient: userClient,

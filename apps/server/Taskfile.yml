@@ -3,9 +3,15 @@ version: '3'
 # dotenv: []
 
 tasks:
-  run:
+  dev:
     env:
       GRPC_PORT: 4567
     cmds:
       - nodemon -e go --signal SIGKILL --exec 'go run -tags dynamic main.go --dev || exit 1'
 
+
+  run:
+    env:
+      GRPC_PORT: 4567
+    cmds:
+      - go run -tags dynamic main.go --dev

@@ -29,6 +29,7 @@ type UserClient interface {
 	RegisterUser(ctx context.Context, in *RegisterUserIn, opts ...grpc.CallOption) (*GetUserOut, error)
 	UserLogin(ctx context.Context, in *LoginIn, opts ...grpc.CallOption) (*SessionOut, error)
 	UserLogOut(ctx context.Context, in *SessionIdIn, opts ...grpc.CallOption) (*BoolOut, error)
+	UserDebugLog(ctx context.Context, in *LogsIn, opts ...grpc.CallOption) (*BoolOut, error)
 }
 
 type userClient struct {
@@ -102,6 +103,15 @@ func (c *userClient) UserLogOut(ctx context.Context, in *SessionIdIn, opts ...gr
 	return out, nil
 }
 
+func (c *userClient) UserDebugLog(ctx context.Context, in *LogsIn, opts ...grpc.CallOption) (*BoolOut, error) {
+	out := new(BoolOut)
+	err := c.cc.Invoke(ctx, "/User/UserDebugLog", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility
@@ -113,6 +123,7 @@ type UserServer interface {
 	RegisterUser(context.Context, *RegisterUserIn) (*GetUserOut, error)
 	UserLogin(context.Context, *LoginIn) (*SessionOut, error)
 	UserLogOut(context.Context, *SessionIdIn) (*BoolOut, error)
+	UserDebugLog(context.Context, *LogsIn) (*BoolOut, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -140,6 +151,9 @@ func (UnimplementedUserServer) UserLogin(context.Context, *LoginIn) (*SessionOut
 }
 func (UnimplementedUserServer) UserLogOut(context.Context, *SessionIdIn) (*BoolOut, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserLogOut not implemented")
+}
+func (UnimplementedUserServer) UserDebugLog(context.Context, *LogsIn) (*BoolOut, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserDebugLog not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 
@@ -280,6 +294,24 @@ func _User_UserLogOut_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UserDebugLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogsIn)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UserDebugLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/User/UserDebugLog",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UserDebugLog(ctx, req.(*LogsIn))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -314,6 +346,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserLogOut",
 			Handler:    _User_UserLogOut_Handler,
+		},
+		{
+			MethodName: "UserDebugLog",
+			Handler:    _User_UserDebugLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

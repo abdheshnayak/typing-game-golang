@@ -8,4 +8,6 @@ import (
 
 type Domain interface {
 	GetUserById(ctx context.Context, userId string) (*user.GetUserOut, error)
+
+	UserDebugLog(msg string)
 }
